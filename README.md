@@ -6,6 +6,7 @@ Melon Tasting is a Flask app for scheduling 30 min melon tasting appointments.
 
     ⭐ Technologies Used
     ⭐ How to locally run
+    ⭐ Features completed
     ⭐ Features to complete
 
 ## Technologies Used
