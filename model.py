@@ -1,34 +1,40 @@
 """Model for melon tasting schedule app"""
 
+
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Schedule(db.Model):
-    """Schedule"""
-
-    __tablename__ = "schedule"
-
-    schedule_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
-    def __repr__(self):
-        """Show info about schedule"""
-        return f"<Schedule id={self.schedule_id}"
-    
 class User(db.Model):
     """User"""
 
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_name = db.Column(db.String(20), nullable=False)
+    user_name = db.Column(db.String(20))
 
     def __repr__(self):
         """Show info about user"""
-        return f"<User id={self.user_id} name={self.user_name}"
+        return f"<User id={self.user_id} name={self.user_name}>"
+
+# class Tasting(db.Model):
+#     """Tasting"""
+
+#     __tablename__ = "tasting"
+
+#     tasting_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     tasting_date = db.Column(db.Date)
+#     tasting_time = db.Column(db.Time)
+#     available = db.Column(db.Boolean, default=True)
+
+#     def __repr__(self):
+#         """Show info about schedule"""
+#         return f"<Schedule id={self.schedule_id} date={self.date} time={self.time}"
+    
 
 
-def connect_to_db(flask_app, db_uri="postgresql:///melon_sched_db", echo=True):
+
+def connect_to_db(flask_app, db_uri="postgresql:///melon_res_db", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

@@ -6,6 +6,8 @@ from flask import (Flask, render_template, request, flash, session, redirect)
 
 from model import connect_to_db, db
 
+import crud
+
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -24,7 +26,21 @@ def homepage():
 def login():
     """Logs in user"""
 
-    user = request.form.get("login")
+    user_name = request.form.get("login")
+
+    user = crud.login_user(user_name)
+
+    if user == False:
+        flash("That user does not exist, pleast try again")
+        return redirect('/')
+
+    else:
+
+        session["login"] = user.user_name
+
+        return render_template('tastings.html', user_name=user_name)
+
+
 
 if __name__ == "__main__":
     connect_to_db(app)
