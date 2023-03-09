@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Melon Tastings
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <h1>Welcome {{ user_name }}</h1>
+    <form action="/schedule">Schedule a Tasting
+        <input type="date" name="tasting_date">
+        <input type="time" name="tasting_time">
+        <input type="submit">
+
+    </form> 
+
+</div>
+
+{% endblock %}
