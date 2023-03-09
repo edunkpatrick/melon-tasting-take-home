@@ -25,7 +25,8 @@ class Tasting(db.Model):
 
     tasting_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     tasting_date = db.Column(db.Date)
-    tasting_time = db.Column(db.Time)
+    # tasting_start = db.Column(db.Time)
+    # tasting_end = db.Column(db.Time)
     available = db.Column(db.Boolean, default=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
@@ -33,8 +34,11 @@ class Tasting(db.Model):
 
     def __repr__(self):
         """Show info about schedule"""
-        return f"<Schedule id={self.tasting_id} date={self.tasting_date} time={self.tasting_time} user_id={self.user_id}"
+        return f"<Schedule id={self.tasting_id} date={self.tasting_date}"
     
+
+# TO-DO
+# fix tastings table as needed
 
 def connect_to_db(flask_app, db_uri="postgresql:///melon_res_db", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri

@@ -1,8 +1,8 @@
 """Script to seed database"""
 
 import os
-import json
-from random import choice, randint
+
+# will need datetime to seed tastings table
 from datetime import datetime
 from datetime import date
 
@@ -21,5 +21,8 @@ for n in range(1, 11):
 
     new_user = crud.create_user(name)
     model.db.session.add(new_user)
+
+    # TO DO
+    # seed db with tasting time slots
 
 model.db.session.commit()

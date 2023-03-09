@@ -16,16 +16,22 @@ def login_user(user_name):
 
     return User.query.filter(User.user_name == user_name).first()
 
-def create_tasting(user_name, tasting_date, tasting_time):
-    """Create and return a tasting"""
+def find_tasting(tasting_date, start_time, end_time):
+    """Find an available a tasting"""
 
-    name = User.query.filter(User.user_name == user_name).first()
-    user_id = name.user_id
+    is_available = Tasting.query.filter(Tasting.tasting_date == tasting_date, Tasting.available == True).all()
+    
+    if is_available:
+        # need to populate all available time slots to pass to server.py
+        return True
+    
+    else:
+        return False
 
-    tasting = Tasting(tasting_date=tasting_date, tasting_time=tasting_time, 
-                      user_id=user_id, available = False)
+# TO DO
+# function to select appointment time
+# function to show scheduled tastings for user
 
-    return tasting
 
 if __name__ == '__main__':
     from server import app

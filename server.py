@@ -47,18 +47,30 @@ def schedule():
     """Schedules a tasting"""
 
     date = request.args.get("tasting_date")
-    time = request.args.get("tasting_time")
+    start_time = request.args.get("tasting_start")
+    end_time = request.args.get("tasting_end")
 
     user_name = session["login"]
 
-    confirm_tasting = crud.create_tasting(user_name, date, time)
+    find_tasting = crud.find_tasting(date, start_time, end_time)
 
-    print(confirm_tasting)
+    if find_tasting == False:
 
-    flash(f"you've selected {date}, {time}")
+        # temp to confirm that form submission working correctly
+        flash(f"this time unavailable {date}, {start_time}, {end_time}")
+
+    else:
+        # temp to confirm that form submission working correctly
+        flash(f"you've selected {date}, {start_time}, {end_time}")
+
+        # populate all available time slots on given day
 
     return render_template('tastings.html', user_name=user_name)
 
+# TO DO
+# populate available tastings
+# route to show user's scheduled tastings
+# log-out route
 
 if __name__ == "__main__":
     connect_to_db(app)
